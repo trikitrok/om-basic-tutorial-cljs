@@ -1,6 +1,7 @@
 (ns om-tut.core
-  (:require [om.core :as om :include-macros true]
-            [om.dom :as dom :include-macros true]))
+  (:require
+    [om.core :as om :include-macros true]
+    [om.dom :as dom :include-macros true]))
 
 (enable-console-print!)
 
@@ -8,26 +9,16 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 
-(defonce app-state (atom {:text "Hello world!"}))
-
-(om/root
-  (fn [data owner]
-    (reify om/IRender
-      (render [_]
-        (dom/div nil
-                 (dom/h1 nil (:text data))
-                 (dom/h3 nil "moko!")))))
-  app-state
-  {:target (. js/document (getElementById "app0"))})
+(defonce app-state
+  (atom {:list ["Lion" "Zebra" "Buffalo" "Antelope"]}))
 
 (om/root
   (fn [data owner]
     (om/component
-      (dom/div nil
-               (dom/h1 nil (:text data))
-               (dom/h3 nil "loko!"))))
+      (apply dom/ul #js {:className "animals"}
+             (map #(dom/li nil %) (:list data)))))
   app-state
-  {:target (. js/document (getElementById "app1"))})
+  {:target (. js/document (getElementById "app0"))})
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on
