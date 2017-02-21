@@ -16,12 +16,21 @@
       (render [_]
         (dom/div nil
                  (dom/h1 nil (:text data))
-                 (dom/h3 nil "Edit this and watch it change!")))))
+                 (dom/h3 nil "moko!")))))
   app-state
-  {:target (. js/document (getElementById "app"))})
+  {:target (. js/document (getElementById "app0"))})
+
+(om/root
+  (fn [data owner]
+    (om/component
+      (dom/div nil
+               (dom/h1 nil (:text data))
+               (dom/h3 nil "loko!"))))
+  app-state
+  {:target (. js/document (getElementById "app1"))})
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
-)
+  )
