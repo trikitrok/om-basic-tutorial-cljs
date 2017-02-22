@@ -29,7 +29,8 @@
                 ;; the presence of a :figwheel configuration here
                 ;; will cause figwheel to inject the figwheel client
                 ;; into your build
-                :figwheel {:on-jsload "om-tut.core/on-js-reload"
+                :figwheel {:load-warninged-code true
+                           :on-jsload "om-tut.core/on-js-reload"
                            ;; :open-urls will pop open your application
                            ;; in the default browser once Figwheel has
                            ;; started and complied your application.
