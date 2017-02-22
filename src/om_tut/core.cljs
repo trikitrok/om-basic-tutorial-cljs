@@ -82,8 +82,20 @@
         (apply dom/ul nil
           (om/build-all entry-view (people data)))))))
 
+(defn classes-view [data owner]
+  (reify
+    om/IRender
+    (render [_]
+      (dom/div #js {:id "classes"}
+        (dom/h2 nil "Classes")
+        (apply dom/ul nil
+          (map #(dom/li nil %) (vals (:classes data))))))))
+
 (om/root registry-view app-state
   {:target (. js/document (getElementById "registry"))})
+
+(om/root classes-view app-state
+  {:target (. js/document (getElementById "classes"))})
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on
